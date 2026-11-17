@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 15px;
+            background: transparent;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-height: 100px;
+
+            font-family: Arial, sans-serif;
+        }
+
+        button {
+            background: #ec008c;
+            color: white;
+
+            border: none;
+            border-radius: 22px;
+
+            padding: 20px 40px;
+
+            font-size: 20px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow: 0 6px 0 #c90075;
+
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #c90075;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="generateButton">
+        Generate Storefront
+    </button>
+
+    <script>
+        const CSV_FILE = "./links.csv";
+
+        const button = document.getElementById("generateButton");
+
+        function parseCSV(text) {
+            const rows = [];
+            let row = [];
+            let field = "";
+            let quoted = false;
+
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const next = text[i + 1];
+
+                if (char === '"' && quoted && next === '"') {
+                    field += '"';
+                    i++;
+                } else if (char === '"') {
+                    quoted = !quoted;
+                } else if (char === "," && !quoted) {
+                    row.push(field.trim());
+                    field = "";
+                } else if ((char === "\n" || char === "\r") && !quoted) {
+                    if (char === "\r" && next === "\n") i++;
+
+                    row.push(field.trim());
+
+                    if (row.some(v => v !== "")) rows.push(row);
+
+                    row = [];
+                    field = "";
+                } else {
+                    field += char;
+                }
+            }
+
+            if (field || row.length) {
+                row.push(field.trim());
+                if (row.some(v => v !== "")) rows.push(row);
+            }
+
+            return rows;
+        }
+
+        button.addEventListener("click", async () => {
+            button.disabled = true;
+
+            try {
+                const response = await fetch(
+                    CSV_FILE + "?t=" + Date.now()
+                );
+
+                if (!response.ok) {
+                    throw new Error("Unable to load storefronts.");
+                }
+
+                const rows = parseCSV(await response.text());
+
+                const headers = rows[0].map(h =>
+                    h.replace(/^\uFEFF/, "").toLowerCase().trim()
+                );
+
+                const nameIndex = headers.indexOf("name");
+                const urlIndex = headers.indexOf("url");
+
+                if (nameIndex === -1 || urlIndex === -1) {
+                    throw new Error("Invalid CSV headers.");
+                }
+
+                const links = rows.slice(1)
+                    .map(row => ({
+                        name: row[nameIndex]?.trim(),
+                        url: row[urlIndex]?.trim()
+                    }))
+                    .filter(link => {
+                        if (!link.name || !link.url) return false;
+
+                        try {
+                            const url = new URL(link.url);
+                            return ["http:", "https:"].includes(url.protocol);
+                        } catch {
+                            return false;
+                        }
+                    });
+
+                if (!links.length) {
+                    throw new Error("No storefronts found.");
+                }
+
+                const selected =
+                    links[Math.floor(Math.random() * links.length)];
+
+                window.open(
+                    selected.url,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+
+            } catch (error) {
+                alert(error.message);
+            } finally {
+                button.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+</html>
