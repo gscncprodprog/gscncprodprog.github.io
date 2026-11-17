@@ -9,6 +9,53 @@
     <title>Random Link Generator</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px;
+            padding: 30px 20px;
+            margin: auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .generator-card {
+            text-align: center;
+            width: 100%;
+        }
+
+        #randomButton {
+            display: block;
+            margin: 25px auto;
+        }
+
+        .result {
+            text-align: center;
+            margin: 25px auto;
+        }
+
+        .open-button {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,26 +72,22 @@
             </p>
         </header>
 
-        <!-- Generator section -->
         <section class="generator-card">
 
             <div class="sparkle">✨</div>
 
             <h2>Which store will you go to today?</h2>
 
-            <p>
-                Let fate choose.
-            </p>
+            <p>Let fate choose.</p>
 
             <button id="randomButton">
-                 Generate Random Storefront
+                Generate Random Storefront
             </button>
 
             <p id="status" aria-live="polite">
                 Ready when you are!
             </p>
 
-            <!-- Selected link preview -->
             <div id="result" class="result hidden">
 
                 <div class="result-icon">🌎</div>
@@ -64,6 +107,7 @@
 
             </div>
 
+        </section>
 
     </main>
 
