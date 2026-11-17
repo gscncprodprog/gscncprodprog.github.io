@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Random Link Generator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="main-container">
+
+        <header>
+            <div class="logo">🎲</div>
+
+            <h1>Random Link Generator</h1>
+
+            <p class="subtitle">
+                Discover something unexpected!
+            </p>
+        </header>
+
+        <!-- Generator section -->
+        <section class="generator-card">
+
+            <div class="sparkle">✨</div>
+
+            <h2>Where will you go today?</h2>
+
+            <p>
+                Let fate choose your next destination.
+            </p>
+
+            <button id="randomButton">
+                🎲 Generate Random Link
+            </button>
+
+            <p id="status" aria-live="polite">
+                Ready when you are!
+            </p>
+
+            <!-- Selected link preview -->
+            <div id="result" class="result hidden">
+
+                <div class="result-icon">🌎</div>
+
+                <h3 id="linkName"></h3>
+
+                <a
+                    id="linkURL"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                </a>
+
+                <button id="openButton" class="open-button">
+                    🚀 Visit Website
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- Statistics -->
+        <div class="stats">
+            <div class="stat-card">
+                <span>📚</span>
+                <strong id="totalLinks">0</strong>
+                <small>Available Links</small>
+            </div>
+
+            <div class="stat-card">
+                <span>🎯</span>
+                <strong id="totalGenerated">0</strong>
+                <small>Generated</small>
+            </div>
+        </div>
+
+        <!-- History -->
+        <section class="history-card">
+
+            <div class="history-header">
+                <h2>🕒 Your History</h2>
+
+                <button id="clearHistory" class="clear-button">
+                    Clear
+                </button>
+            </div>
+
+            <div id="historyList">
+                <p class="empty-history">
+                    Your discoveries will appear here!
+                </p>
+            </div>
+
+        </section>
+
+        <footer>
+            Made for curious minds ✨
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
