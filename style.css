@@ -13,7 +13,7 @@
     --pink: #ec008c;
     --pink-dark: #c90075;
     --purple: #542583;
-    --cream: #fffaf2;
+    --white: #ffffff;
 }
 
 /* PAGE */
@@ -26,7 +26,7 @@
 
 body {
     font-family: 'Girl Scout', Arial, sans-serif;
-    background: var(--cream);
+    background: var(--white);
     min-height: 100vh;
     color: var(--purple);
 }
