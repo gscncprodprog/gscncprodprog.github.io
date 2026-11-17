@@ -1,0 +1,186 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap');
+
+:root {
+    --pink: #ec008c;
+    --pink-dark: #c90075;
+    --purple: #542583;
+    --cream: #fffaf2;
+}
+
+/* PAGE */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito Sans', Arial, sans-serif;
+    background: var(--cream);
+    min-height: 100vh;
+    color: var(--purple);
+}
+
+/* MAIN CONTAINER */
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 35px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* TITLE */
+
+header {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+}
+
+header h1 {
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 900;
+    color: var(--purple);
+    letter-spacing: -1px;
+}
+
+/* GENERATOR AREA */
+
+.generator {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    max-width: 700px;
+
+    text-align: center;
+    padding-bottom: 100px;
+}
+
+/* MAIN BUTTON */
+
+#randomButton {
+    background: var(--pink);
+    color: white;
+
+    border: none;
+    border-radius: 22px;
+
+    padding: 27px 65px;
+
+    font-family: inherit;
+    font-size: 24px;
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow: 0 7px 0 var(--pink-dark);
+
+    transition: all 0.2s ease;
+}
+
+#randomButton:hover {
+    background: var(--pink-dark);
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 0 #a90062;
+}
+
+#randomButton:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #a90062;
+}
+
+#randomButton:disabled {
+    opacity: 0.6;
+    cursor: wait;
+    transform: none;
+}
+
+/* RESULT */
+
+.result {
+    margin-top: 45px;
+    animation: appear 0.4s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+.result h2 {
+    font-size: clamp(23px, 4vw, 32px);
+    font-weight: 900;
+    color: var(--purple);
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.result a {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--pink-dark);
+
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+}
+
+.result a:hover {
+    color: var(--purple);
+}
+
+/* STATUS */
+
+#status {
+    margin-top: 25px;
+    font-size: 15px;
+    color: var(--purple);
+}
+
+/* ANIMATION */
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 25px 18px;
+    }
+
+    header h1 {
+        font-size: 38px;
+    }
+
+    #randomButton {
+        width: 100%;
+        padding: 24px 15px;
+        font-size: 20px;
+    }
+
+    .generator {
+        padding-bottom: 60px;
+    }
+
+}
